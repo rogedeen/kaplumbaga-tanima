@@ -1,5 +1,6 @@
 # Dependency directories
 node_modules/
+**/node_modules/
 dist/
 build/
 .next/
@@ -8,8 +9,9 @@ out/
 .env.*
 !.env.example
 
-# Python / AI
+# Python / AI / Models
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 .venv
@@ -22,6 +24,9 @@ htmlcov/
 *.pth
 *.onnx
 *.weights
+*.pkl
+src/models/
+datasets/
 dataset/
 data/raw/
 data/processed/
@@ -39,6 +44,7 @@ uploads/
 *.log
 temp/
 tmp/
+output/
 
 # Prisma
 /prisma/migrations/
