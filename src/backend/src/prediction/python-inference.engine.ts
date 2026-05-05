@@ -15,12 +15,12 @@ export class PythonInferenceEngine implements IInferenceEngine {
     const rootDir = path.resolve(process.cwd(), '..');
     const pythonPath = path.join(rootDir, '..', '.venv', 'Scripts', 'python');
     const scriptPath = path.join(rootDir, 'evaluate_single_image.py');
-    
+
     try {
       this.logger.log(`Executing Python script: ${scriptPath} using ${pythonPath}`);
-      
+
       const { stdout, stderr } = await execAsync(`"${pythonPath}" "${scriptPath}" "${imagePath}"`);
-      
+
       if (stderr) {
         this.logger.warn(`Python stderr: ${stderr}`);
       }
