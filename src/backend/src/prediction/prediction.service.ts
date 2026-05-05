@@ -32,7 +32,7 @@ export class PredictionService {
       imageUrl: imagePath,
       resultJson: result.raw,
       confidence: result.confidence,
-      turtleId: result.turtleId,
+      turtleId: result.turtleId ?? undefined,
     }).catch(err => this.logger.error(`DB Save failed: ${err.message}`));
 
     // 3. Audit Logging (Academic requirement)
