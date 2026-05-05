@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Turtle {
+  id          String       @id @default(uuid())
+  name        String
+  tag         String?      @unique
+  description String?
+  images      Image[]
+  predictions Prediction[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  url       String
+  turtle    Turtle   @relation(fields: [turtleId], references: [id])
+  turtleId  String
+  createdAt DateTime @default(now())
+}
+
+model Prediction {
+  id           String   @id @default(uuid())
+  imageUrl     String
+  resultJson   Json
+  confidence   Float
+  turtle       Turtle?  @relation(fields: [turtleId], references: [id])
+  turtleId     String?
+  detectedAt   DateTime @default(now())
+}

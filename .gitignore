@@ -1,0 +1,50 @@
+# Dependency directories
+node_modules/
+dist/
+build/
+.next/
+out/
+.env
+.env.*
+!.env.example
+
+# Python / AI
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+ENV/
+env/
+.pytest_cache/
+.coverage
+htmlcov/
+*.pth
+*.onnx
+*.weights
+dataset/
+data/raw/
+data/processed/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs & Temporary Files
+logs/
+uploads/
+*.log
+temp/
+tmp/
+
+# Prisma
+/prisma/migrations/
+/prisma/dev.db
+/prisma/dev.db-journal
+
+# OS files
+Thumbs.db
+desktop.ini
