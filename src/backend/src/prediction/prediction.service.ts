@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { TurtleService } from '../turtle/turtle.service';
 import { PythonInferenceEngine } from './python-inference.engine';
 import { InferenceResult } from './prediction.interface';
 import * as fs from 'fs';
@@ -12,7 +11,6 @@ export class PredictionService {
 
   constructor(
     private readonly inferenceEngine: PythonInferenceEngine,
-    private readonly turtleService: TurtleService,
   ) {
     // Ensure logs directory exists
     const logDir = path.dirname(this.logFilePath);
@@ -24,18 +22,10 @@ export class PredictionService {
   async predict(imagePath: string): Promise<InferenceResult> {
     this.logger.log(`Prediction request received for: ${imagePath}`);
 
-    // 1. Run Inference (SRP: Logic delegated to engine)
+    // 1. Run Inference (Logic delegated to engine)
     const result = await this.inferenceEngine.runInference(imagePath);
 
-    // 2. Persist to DB (SRP: Logic delegated to turtleService)
-    await this.turtleService.savePrediction({
-      imageUrl: imagePath,
-      resultJson: result.raw,
-      confidence: result.confidence,
-      turtleId: result.turtleId ?? undefined,
-    }).catch(err => this.logger.error(`DB Save failed: ${err.message}`));
-
-    // 3. Audit Logging (Academic requirement)
+    // 2. Audit Logging (Audit log dosya tabanlı devam eder, veritabanına ihtiyaç duymaz)
     this.auditLog(imagePath, result);
 
     return result;
